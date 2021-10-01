@@ -13,6 +13,9 @@
 		F91F61B727048C6200C8BB69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F91F61B527048C6200C8BB69 /* Main.storyboard */; };
 		F91F61B927048C6500C8BB69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F91F61B827048C6500C8BB69 /* Assets.xcassets */; };
 		F91F61BC27048C6500C8BB69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F91F61BA27048C6500C8BB69 /* LaunchScreen.storyboard */; };
+		F91F61C9270560DC00C8BB69 /* DemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F61C7270560DC00C8BB69 /* DemoCollectionViewCell.swift */; };
+		F91F61CA270560DC00C8BB69 /* DemoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F91F61C8270560DC00C8BB69 /* DemoCollectionViewCell.xib */; };
+		F91F61CE2705762000C8BB69 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F61CD2705762000C8BB69 /* model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		F91F61B827048C6500C8BB69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F91F61BB27048C6500C8BB69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F91F61BD27048C6500C8BB69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F91F61C7270560DC00C8BB69 /* DemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCollectionViewCell.swift; sourceTree = "<group>"; };
+		F91F61C8270560DC00C8BB69 /* DemoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoCollectionViewCell.xib; sourceTree = "<group>"; };
+		F91F61CD2705762000C8BB69 /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				F91F61B827048C6500C8BB69 /* Assets.xcassets */,
 				F91F61BA27048C6500C8BB69 /* LaunchScreen.storyboard */,
 				F91F61BD27048C6500C8BB69 /* Info.plist */,
+				F91F61C7270560DC00C8BB69 /* DemoCollectionViewCell.swift */,
+				F91F61C8270560DC00C8BB69 /* DemoCollectionViewCell.xib */,
+				F91F61CD2705762000C8BB69 /* model.swift */,
 			);
 			path = DemoApiApp;
 			sourceTree = "<group>";
@@ -128,6 +137,7 @@
 				F91F61BC27048C6500C8BB69 /* LaunchScreen.storyboard in Resources */,
 				F91F61B927048C6500C8BB69 /* Assets.xcassets in Resources */,
 				F91F61B727048C6200C8BB69 /* Main.storyboard in Resources */,
+				F91F61CA270560DC00C8BB69 /* DemoCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,9 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91F61CE2705762000C8BB69 /* model.swift in Sources */,
 				F91F61B427048C6200C8BB69 /* ViewController.swift in Sources */,
 				F91F61B027048C6200C8BB69 /* AppDelegate.swift in Sources */,
 				F91F61B227048C6200C8BB69 /* SceneDelegate.swift in Sources */,
+				F91F61C9270560DC00C8BB69 /* DemoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +301,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F2R6AMVTD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DemoApiApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -316,6 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F2R6AMVTD8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DemoApiApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
