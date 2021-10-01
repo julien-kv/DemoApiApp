@@ -8,13 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
-    
     var searchText:String?
-    
     @IBOutlet var searchTextField: UITextField!
-    
     @IBAction func didTapSearchButton(_ sender: UIButton) {
-        self.messageFrame.removeFromSuperview()
         searchText=searchTextField.text!
         print(searchText!)
         searchTextField.text=""
@@ -23,19 +19,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         displayActivityIndicator()
     }
     var ImageArray=[Result]()
-    
-    
     let activityIndicator = UIActivityIndicatorView(style: .large)
-        let messageFrame = UIView()
-
-        func displayActivityIndicator() {
-            messageFrame.layer.cornerRadius = 15
-            //messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
-            activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            activityIndicator.startAnimating()
-            messageFrame.addSubview(activityIndicator)
-            view.addSubview(messageFrame)
-        }
+    let messageFrame = UIView()
+    
+    func displayActivityIndicator() {
+        self.notFoundFrame.removeFromSuperview()
+        messageFrame.layer.cornerRadius = 15
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.startAnimating()
+        messageFrame.addSubview(activityIndicator)
+        view.addSubview(messageFrame)
+    }
     @IBOutlet var DemoCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,21 +38,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.searchTextField.delegate=self
         DemoCollectionView.collectionViewLayout=UICollectionViewFlowLayout()
         DemoCollectionView.register(UINib(nibName: "DemoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
-        
-        
-        
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return ImageArray.count
-        
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as!DemoCollectionViewCell
         
         let imageUrl=ImageArray[indexPath.row].urls.small       // print(imageUrl)
@@ -72,22 +56,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func fetchPhotos(for search:String){
         let url="https://api.unsplash.com/search/photos?page=1&per_page=15&query=\(search)&client_id=ARCJGWPx6viI4sCU0if89JhqLYp-LxqyMoRcLt6ZfDI"
-        
-        
         guard let url=URL(string: url) else{
             return
         }
-        
         let task=URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data=data,error == nil else{
                 return
             }
             do{
                 let jsonResult = try JSONDecoder().decode(Welcome.self, from: data)
-                //print(jsonResult.results[0].urls.full)
-                // self.ImageArray.append(contentsOf: jsonResult.results)
-                //self.DemoCollectionView.reloadData()
-                
                 DispatchQueue.main.async {
                     self.ImageArray=jsonResult.results
                     self.activityIndicator.stopAnimating()
@@ -95,39 +72,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                     self.DemoCollectionView.reloadData()
                     if(self.ImageArray.count==0){
-                        self.messageFrame.frame = CGRect(x: self.view.frame.midX-140, y: self.view.frame.midY-50, width: 250, height: 50)
+                        self.notFoundFrame.frame = CGRect(x: self.view.frame.midX-140, y: self.view.frame.midY-50, width: 250, height: 50)
                         self.notFound()
-                        
                     }
-                    
                 }
-                
-                //print(self.ImageArray)
-                
             }
             catch{
                 print(error)
             }
         }
-        
         task.resume()
         
     }
-    
-    
-   // let messageFrame = UIView()
+    let notFoundFrame=UIView()
     let strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 250, height: 50))
     func notFound() {
         strLabel.text = "Not Found Any Results"
         strLabel.textColor = .red
-        messageFrame.layer.cornerRadius = 15
-        messageFrame.backgroundColor = UIColor.white
-        messageFrame.addSubview(strLabel)
-        view.addSubview(messageFrame)
+        notFoundFrame.layer.cornerRadius = 15
+        notFoundFrame.backgroundColor = UIColor.white
+        notFoundFrame.addSubview(strLabel)
+        view.addSubview(notFoundFrame)
     }
-    
 }
-
 extension ViewController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -135,7 +102,6 @@ extension ViewController:UICollectionViewDelegateFlowLayout{
         return CGSize(width: size, height: size)
     }
 }
-
 func getItemSize(collectionView:UICollectionView, collectionViewLayout:UICollectionViewLayout) -> Int {
     let nbCol = 2
     let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -145,11 +111,7 @@ func getItemSize(collectionView:UICollectionView, collectionViewLayout:UICollect
     let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(nbCol))
     return size
 }
-
-
 extension ViewController:UITextFieldDelegate{
-    
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.ImageArray.removeAll()
         self.DemoCollectionView.reloadData()
